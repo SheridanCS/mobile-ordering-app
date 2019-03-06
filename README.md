@@ -12,7 +12,7 @@
 
 ## Install
 
-1. Clone the passionfruit repository
+1. Clone the mobile-ordering-app repository
     * `git clone git@github.com:SheridanCS/mobile-ordering-app.git && cd mobile-ordering-app`
 2. Run `npm install`
 3. You may also have to run the command `react-native link`
