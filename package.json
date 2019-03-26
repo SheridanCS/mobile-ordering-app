@@ -17,6 +17,8 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-paper": "^2.13.0",
     "react-navigation": "^3.0.9",
+    "redux": "^4.0.1",
+    "react-redux": "^6.0.1",
     "redux-saga": "^1.0.2"
   },
   "devDependencies": {
