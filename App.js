@@ -4,7 +4,7 @@ import {AppLoading, Asset, Font, Icon} from 'expo';
 import {Provider as PaperProvider} from 'react-native-paper';
 import {Provider as ReduxProvider} from 'react-redux';
 import AppNavigator from './navigation/AppNavigator';
-import store from './redux/store';
+import store from './redux/store'
 
 export default class App extends React.Component {
     state = {
@@ -26,6 +26,7 @@ export default class App extends React.Component {
                     <PaperProvider>
                         <View style={styles.container}>
                             {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
+                            {Platform.OS === 'android' && <StatusBar barStyle={"default"} hidden={true}/>}
                             <AppNavigator/>
                         </View>
                     </PaperProvider>

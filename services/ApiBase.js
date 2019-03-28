@@ -27,8 +27,6 @@ export function Post(url, body) {
         body: JSON.stringify(body)
     }).then((response) => {
         return response.json()
-    }).then((responseJson) => {
-        return responseJson;
     }).catch(error => {
         return error
     });
@@ -43,8 +41,6 @@ export function Put(url, body) {
         body: JSON.stringify(body)
     }).then((response) => {
         return response.json()
-    }).then((responseJson) => {
-        return responseJson;
     }).catch(error => {
         return error
     });
