@@ -1,6 +1,11 @@
 import * as Api from './ApiBase';
 import {RESTAURANTS} from '../constants/Api';
 
-export async function getRestaurantsList() {
-    return await Api.Get(RESTAURANTS);
+const headers = new Headers();
+headers.append('Accept', 'application/json');
+headers.append('Content-Type', 'application/json');
+
+export async function getRestaurantsList(token) {
+    headers.append('Authorization', `Bearer ${token}`);
+    return await Api.Get(RESTAURANTS, headers);
 }
