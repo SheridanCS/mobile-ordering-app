@@ -21,7 +21,7 @@ class HomeScreen extends React.Component {
     };
 
     componentDidMount() {
-        this.props.dispatch({type: GET_RESTAURANTS_LIST});
+        this._getRestaurantsList();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -41,10 +41,6 @@ class HomeScreen extends React.Component {
     _getRestaurantsList = () => {
         this.setState({Refreshing: true});
         this.props.dispatch({type: GET_RESTAURANTS_LIST});
-    };
-
-    _getRestaurantsItemCount = () => {
-        return this.props.restaurants.length
     };
 
     render() {

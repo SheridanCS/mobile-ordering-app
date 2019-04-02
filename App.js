@@ -26,7 +26,6 @@ export default class App extends React.Component {
                     <PaperProvider>
                         <View style={styles.container}>
                             {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
-                            {Platform.OS === 'android' && <StatusBar barStyle={"default"} hidden={true}/>}
                             <AppNavigator/>
                         </View>
                     </PaperProvider>

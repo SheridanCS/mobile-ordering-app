@@ -1,11 +1,5 @@
-const headers = {
-    'Accept': 'application/json',
-    'Content-Type':'application/json'
-};
-
-export function Get(url) {
+export function Get(url, headers) {
     console.log('GET', url);
-
     return fetch(url, {
         method: 'GET',
         headers: headers
@@ -18,27 +12,24 @@ export function Get(url) {
     });
 }
 
-export function Post(url, body) {
+export function Post(url, headers, body) {
     console.log('POST', url);
-
     return fetch(url, {
         method: 'POST',
         headers: headers,
-        body: JSON.stringify(body)
+        body: body
     }).then((response) => {
         return response.json()
-    }).catch(error => {
-        return error
-    });
+    }).catch(error => ({error}));
 }
 
-export function Put(url, body) {
+export function Put(url, headers, body) {
     console.log('PUT', url);
 
     return fetch(url, {
         method: 'PUT',
         headers: headers,
-        body: JSON.stringify(body)
+        body: body
     }).then((response) => {
         return response.json()
     }).catch(error => {
@@ -46,7 +37,7 @@ export function Put(url, body) {
     });
 }
 
-export function Delete(url) {
+export function Delete(url, headers) {
     console.log('DELETE', url);
 
     return fetch(url, {
