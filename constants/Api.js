@@ -5,9 +5,9 @@ const USERS_BASE = API_BASE + '/users';
 
 export const CLIENT_ID = 'jwtclientid';
 export const CLIENT_SECRET = 'jwtpass';
-export const AUTH_BASIC = 'and0Y2xpZW50aWQ6and0cGFzcw==';
 
 export const TOKEN_ENDPOINT = OAUTH_BASE + '/token';
+export const CHECK_TOKEN_ENDPOINT = OAUTH_BASE + '/check_token';
 
 export const RESTAURANTS = API_BASE + '/restaurants';
 

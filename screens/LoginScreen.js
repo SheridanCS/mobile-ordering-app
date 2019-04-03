@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {ActivityIndicator, Button, Surface, Text, TextInput} from "react-native-paper";
+import {Button, Surface, TextInput} from "react-native-paper";
 import {connect} from "react-redux";
 
-import {USER_LOGIN_START} from '../redux/actionTypes';
+import {APP_LOADED, USER_LOGIN_START} from '../redux/actionTypes';
 
 class LoginScreen extends React.Component {
     static navigationOptions = {
@@ -61,14 +61,14 @@ class LoginScreen extends React.Component {
                     <Button
                         mode="contained"
                         loading={this.state.loggingIn}
-                        // disabled={this.state.loggingIn}
+                        disabled={this.state.loggingIn}
                         onPress={this._doLogin}>
                         Login
                     </Button>
                 </Surface>
                 <Surface style={styles.formGroup}>
                     <Button
-                        // disabled={this.state.loggingIn}
+                        disabled={this.state.loggingIn}
                         onPress={this._navigateToRegisterScreen}>
                         Create an account
                     </Button>

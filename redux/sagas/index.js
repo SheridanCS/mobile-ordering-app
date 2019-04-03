@@ -1,10 +1,11 @@
 import {all} from 'redux-saga/effects';
 
 import {watchGetRestaurantsList} from './restaurants';
-import {watchUserLoginStart} from "./users";
+import {watchAppLoaded, watchUserLoginStart} from "./users";
 
 export default function* rootSaga() {
     yield all([
+        watchAppLoaded(),
         watchUserLoginStart(),
         watchGetRestaurantsList()
     ]);
