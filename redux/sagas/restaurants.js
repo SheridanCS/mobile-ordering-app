@@ -1,7 +1,7 @@
 import {call, put, select, takeLatest} from 'redux-saga/effects';
 
 import {GET_RESTAURANTS_LIST, RESTAURANTS_LIST_UPDATED} from '../actionTypes';
-import {getRestaurantsList as apiGetRestaurantsList} from '../../services/RestaurantsService';
+import * as Restaurants from '../../services/RestaurantsService';
 import {getAuthState} from "../selectors";
 
 export function* watchGetRestaurantsList() {
@@ -10,8 +10,9 @@ export function* watchGetRestaurantsList() {
 
 function* getRestaurantsList() {
     const auth = yield select(getAuthState);
-    let restaurants = yield call(apiGetRestaurantsList, auth.access_token);
-    if (restaurants._embedded) {
+    let restaurants = yield call(Restaurants.getRestaurantsList, auth.access_token);
+    console.log(restaurants);
+    if (restaurants !== undefined && restaurants._embedded) {
         yield put({
             type: RESTAURANTS_LIST_UPDATED,
             payload: restaurants._embedded.restaurantList

@@ -1,9 +1,10 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Button, Surface, TextInput} from "react-native-paper";
+import {KeyboardAvoidingView, StyleSheet, View} from 'react-native';
+import {Button, TextInput} from "react-native-paper";
 import {connect} from "react-redux";
 
-import {APP_LOADED, USER_LOGIN_START} from '../redux/actionTypes';
+import ErrorSnackbar from '../components/ErrorSnackbar';
+import {CLEAR_ERRORS, USER_LOGIN_START} from '../redux/actionTypes';
 
 class LoginScreen extends React.Component {
     static navigationOptions = {
@@ -11,9 +12,12 @@ class LoginScreen extends React.Component {
     };
 
     state = {
-        loggingIn: false,
         username: '',
         password: '',
+    };
+
+    _dismissError = () => {
+        this.props.dispatch({ type: CLEAR_ERRORS });
     };
 
     _doLogin = () => {
@@ -32,47 +36,63 @@ class LoginScreen extends React.Component {
     };
 
     componentDidUpdate() {
-        if (this.props.user.IsLoggedIn) {
+        const user = this.props.user;
+        if (user.IsLoggedIn) {
             this.props.navigation.navigate('Main');
+        }
+        if (!user.AuthInProgress && user.Error.length > 0) {
+
         }
     }
 
     render() {
         return (
             <>
-                <View style={styles.formGroup}>
-                    <TextInput
-                        label='Username'
-                        mode='outlined'
-                        value={this.state.username}
-                        onChangeText={username => this.setState({ username })}
-                    />
+                <View style={{flex: 4}}>
+                    <View style={styles.formGroup}>
+                        <TextInput
+                            label='Username'
+                            mode='outlined'
+                            value={this.state.username}
+                            onChangeText={username => this.setState({ username })}
+                        />
+                    </View>
+                    <View style={styles.formGroup}>
+                        <TextInput
+                            label='Password'
+                            mode='outlined'
+                            secureTextEntry={true}
+                            value={this.state.password}
+                            onChangeText={password => this.setState({ password })}
+                        />
+                    </View>
                 </View>
-                <Surface style={styles.formGroup}>
-                    <TextInput
-                        label='Password'
-                        mode='outlined'
-                        secureTextEntry={true}
-                        value={this.state.password}
-                        onChangeText={password => this.setState({ password })}
-                    />
-                </Surface>
-                <Surface style={styles.formGroup}>
-                    <Button
-                        mode="contained"
-                        loading={this.state.loggingIn}
-                        disabled={this.state.loggingIn}
-                        onPress={this._doLogin}>
-                        Login
-                    </Button>
-                </Surface>
-                <Surface style={styles.formGroup}>
-                    <Button
-                        disabled={this.state.loggingIn}
-                        onPress={this._navigateToRegisterScreen}>
-                        Create an account
-                    </Button>
-                </Surface>
+                <View style={{flex: 1}}>
+                    <View style={[styles.bottom, styles.button]}>
+                        <Button
+                            mode="contained"
+                            loading={this.props.user.AuthInProgress}
+                            disabled={this.props.user.AuthInProgress}
+                            onPress={this._doLogin}>
+                            Login
+                        </Button>
+                    </View>
+                    <View style={[styles.bottom, styles.button]}>
+                        <Button
+                            disabled={this.props.user.AuthInProgress}
+                            onPress={this._navigateToRegisterScreen}>
+                            Create an account
+                        </Button>
+                    </View>
+                    <View style={styles.bottom}>
+                        <ErrorSnackbar
+                            visible={(this.props.user.Error.error_description !== null)}
+                            onDismiss={this._dismissError}
+                            onPress={this._dismissError}
+                            barText={this.props.user.Error.error_description}
+                        />
+                    </View>
+                </View>
             </>
         );
     }
@@ -80,8 +100,18 @@ class LoginScreen extends React.Component {
 
 const styles = StyleSheet.create({
     formGroup: {
-        padding: 8,
+        marginHorizontal: 15,
+        marginVertical: 10,
         justifyContent: 'center',
+    },
+    button: {
+        flex: 1,
+        marginHorizontal: 15,
+        marginVertical: 5,
+    },
+    bottom: {
+        flex: 1,
+        justifyContent: 'flex-end'
     }
 });
 

@@ -1,10 +1,8 @@
 import React from 'react';
-import {
-    FlatList,
-    StyleSheet
-} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {Button, Searchbar} from 'react-native-paper';
 import {connect} from 'react-redux';
+import {Constants} from 'expo';
 
 import {GET_RESTAURANTS_LIST} from '../redux/actionTypes';
 import RestaurantItem from '../components/RestaurantItem';
@@ -30,7 +28,7 @@ class HomeScreen extends React.Component {
 
     _renderRestaurantItem = (restaurant) => (
         <RestaurantItem
-            id={restaurant.item.id}
+            key={restaurant.item.id}
             restaurant={restaurant}
             onPress={this._showRestaurantDetails}
         />
@@ -53,7 +51,7 @@ class HomeScreen extends React.Component {
 
     render() {
         return (
-            <>
+            <View style={styles.container}>
                 <Searchbar
                     placeholder={"Search"}
                     onChangeText={this._filterRestaurants}
@@ -65,12 +63,16 @@ class HomeScreen extends React.Component {
                     onRefresh={this._getRestaurantsList}
                     refreshing={this.state.Refreshing}
                 />
-            </>
+            </View>
         );
     }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    container: {
+        marginTop: Constants.statusBarHeight
+    }
+});
 
 const mapStateToProps = state => ({
     restaurants: state.restaurants,

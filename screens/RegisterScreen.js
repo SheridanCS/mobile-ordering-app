@@ -28,7 +28,7 @@ class RegisterScreen extends React.Component {
     _changeConfirmPasswordText = (confirmPassword) => {
         this.setState((prevState) => ({
             confirmPassword,
-            passwordMatchesWarning: confirmPassword === prevState.password
+            passwordMatchesWarning: confirmPassword !== prevState.password
         }));
     };
 
@@ -101,8 +101,8 @@ class RegisterScreen extends React.Component {
 
 const styles = StyleSheet.create({
     formGroup: {
-        padding: 8,
-        justifyContent: 'center',
+        flex: 1,
+        marginHorizontal: 15
     }
 });
 

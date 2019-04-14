@@ -1,6 +1,6 @@
 import React from 'react';
-import {Platform, StatusBar, StyleSheet, View} from 'react-native';
-import {AppLoading, Asset, Font, Icon} from 'expo';
+import {Platform, StatusBar, SafeAreaView, StyleSheet} from 'react-native';
+import {AppLoading, Asset, Constants, Font, Icon} from 'expo';
 import {Provider as PaperProvider} from 'react-native-paper';
 import {Provider as ReduxProvider} from 'react-redux';
 import AppNavigator from './navigation/AppNavigator';
@@ -24,10 +24,11 @@ export default class App extends React.Component {
             return (
                 <ReduxProvider store={store}>
                     <PaperProvider>
-                        <View style={styles.container}>
-                            {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
+                        <SafeAreaView style={styles.container}>
+                            {Platform.OS === 'ios' && <StatusBar barStyle="default" style={styles.statusBar}/>}
+                            {Platform.OS === 'android' && <StatusBar style={styles.statusBar}/>}
                             <AppNavigator/>
-                        </View>
+                        </SafeAreaView>
                     </PaperProvider>
                 </ReduxProvider>
             );
@@ -65,5 +66,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+    },
+    statusBar: {
+        backgroundColor: "#C2185B",
+        height: Constants.statusBarHeight,
     },
 });

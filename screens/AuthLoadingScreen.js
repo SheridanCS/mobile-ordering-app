@@ -1,7 +1,7 @@
 import React from 'react';
-import {AsyncStorage, StatusBar, View,} from 'react-native';
+import {StatusBar, View,} from 'react-native';
 import {ActivityIndicator} from "react-native-paper";
-import {APP_LOADED} from "../redux/actionTypes";
+import {CHECK_AUTH_START} from "../redux/actionTypes";
 import {connect} from "react-redux";
 
 class AuthLoadingScreen extends React.Component {
@@ -10,9 +10,8 @@ class AuthLoadingScreen extends React.Component {
         this._bootstrapAsync();
     }
 
-    // Fetch the token from storage then navigate to our appropriate place
-    _bootstrapAsync = async () => {
-        this.props.dispatch({ type: APP_LOADED });
+    _bootstrapAsync = () => {
+        this.props.dispatch({ type: CHECK_AUTH_START });
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {

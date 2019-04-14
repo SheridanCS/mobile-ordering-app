@@ -3,7 +3,10 @@ import {Image, StyleSheet} from 'react-native';
 import {List} from 'react-native-paper';
 
 class RestaurantItem extends React.Component {
-    _logo = "https://grub2go.herokuapp.com/api/files/" + this.props.restaurant.item.logo;
+    constructor(props) {
+        super(props);
+        this._logo = "https://grub2go.herokuapp.com/api/files/" + props.restaurant.item.logo;
+    }
 
     render() {
         return (
