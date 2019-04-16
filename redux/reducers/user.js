@@ -6,7 +6,7 @@ import {
     USER_LOGIN_END,
     USER_LOGIN_FAIL,
     USER_LOGIN_START,
-    USER_LOGIN_SUCCESS
+    USER_LOGIN_SUCCESS, USER_LOGOUT_SUCCESS
 } from '../actionTypes';
 
 const initialState = {
@@ -59,6 +59,15 @@ export default function(state = initialState, action) {
                 ...state,
                 IsLoggedIn: true,
                 Profile: action.payload
+            };
+        case USER_LOGOUT_SUCCESS:
+            return {
+                ...state,
+                IsLoggedIn: false,
+                Profile: {},
+                Payment: [],
+                Auth: {access_token: null},
+                Error: {error_description: null}
             };
         default:
             return state;

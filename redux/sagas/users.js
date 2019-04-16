@@ -5,7 +5,7 @@ import {
     USER_AUTH_UPDATED,
     USER_LOGIN_FAIL,
     USER_LOGIN_START,
-    USER_LOGIN_SUCCESS
+    USER_LOGIN_SUCCESS, USER_LOGOUT_START, USER_LOGOUT_SUCCESS
 } from '../actionTypes';
 import {getAuthState} from '../selectors'
 import * as Auth from '../../services/AuthService';
@@ -18,6 +18,10 @@ export function* watchCheckAuth() {
 
 export function* watchUserLoginStart() {
     yield takeLatest(USER_LOGIN_START, doLogin);
+}
+
+export function* watchUserLogoutStart() {
+    yield takeLatest(USER_LOGOUT_START, doLogout);
 }
 
 function* checkStorageForAuth() {
@@ -40,6 +44,11 @@ function* doLogin(action) {
     } else {
         yield put({ type: USER_LOGIN_FAIL, payload: response });
     }
+}
+
+function* doLogout() {
+    yield call(Storage.removeUserData);
+    yield put({ type: USER_LOGOUT_SUCCESS });
 }
 
 function* getUserDetails() {

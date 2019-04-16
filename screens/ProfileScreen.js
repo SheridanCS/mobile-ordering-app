@@ -2,11 +2,21 @@ import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Avatar, Button, Divider, Headline, Subheading, TextInput} from "react-native-paper";
 import {connect} from "react-redux";
+import {USER_LOGOUT_START} from "../redux/actionTypes";
 
 class ProfileScreen extends React.Component {
     static navigationOptions = {
         title: 'Profile',
     };
+
+    _doLogout = () => {
+        this.props.dispatch({ type: USER_LOGOUT_START });
+        this.props.navigation.navigate('Login');
+    };
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return (Object.keys(nextProps.user.Profile).length > 0);
+    }
 
     render() {
         const profile = this.props.user.Profile;
@@ -32,9 +42,11 @@ class ProfileScreen extends React.Component {
                         disabled={true}
                     />
                 </View>
-                <Button icon="add-a-photo" mode="text" onPress={() => console.log('Pressed')}>
-                    Press me
-                </Button>
+                <View style={styles.formGroup}>
+                    <Button icon="exit-to-app" mode="text" onPress={this._doLogout}>
+                        Logout
+                    </Button>
+                </View>
             </ScrollView>
         );
     }
@@ -42,6 +54,7 @@ class ProfileScreen extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         alignItems: 'center',
         paddingTop: 24,
         paddingHorizontal: 12,
