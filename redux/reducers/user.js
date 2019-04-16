@@ -13,6 +13,13 @@ const initialState = {
     AuthInProgress: false,
     IsLoggedIn: false,
     Profile:{},
+    Payment: [
+        {
+            Type: 'MASTERCARD',
+            Number: '************3678',
+            Expiry: '09/2019',
+        }
+    ],
     Auth: {access_token: null},
     Error: {error_description: null}
 };

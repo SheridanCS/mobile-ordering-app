@@ -7,6 +7,8 @@ import HomeScreen from '../screens/HomeScreen';
 import OrdersScreen from '../screens/OrdersScreen';
 import RestaurantDetailsScreen from '../screens/RestaurantDetailScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import BadgeTabBarIcon from "../components/BadgeTabBarIcon";
+import CheckoutScreen from "../screens/CheckoutScreen";
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -27,16 +29,22 @@ HomeStack.navigationOptions = {
 
 const OrdersStack = createStackNavigator({
   Orders: OrdersScreen,
+  Checkout: CheckoutScreen,
 });
 
 OrdersStack.navigationOptions = {
   tabBarLabel: 'Orders',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-card' : 'md-card'}
-    />
-  ),
+  tabBarIcon: ({ focused }) => {
+
+    return (
+      <>
+        <BadgeTabBarIcon
+            focused={focused}
+            name={Platform.OS === 'ios' ? 'ios-card' : 'md-card'}
+        />
+      </>
+    );
+  },
 };
 
 const ProfileStack = createStackNavigator({

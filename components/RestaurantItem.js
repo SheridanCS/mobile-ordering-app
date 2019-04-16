@@ -1,11 +1,12 @@
 import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {List} from 'react-native-paper';
+import {FILES_ENDPOINT} from "../constants/Api";
 
 class RestaurantItem extends React.Component {
     constructor(props) {
         super(props);
-        this._logo = "https://grub2go.herokuapp.com/api/files/" + props.restaurant.item.logo;
+        this._logo = FILES_ENDPOINT + props.restaurant.item.logo;
     }
 
     render() {

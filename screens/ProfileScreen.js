@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {Avatar, Divider, Headline, Subheading, Text, TextInput} from "react-native-paper";
+import {Avatar, Button, Divider, Headline, Subheading, TextInput} from "react-native-paper";
 import {connect} from "react-redux";
 
 class ProfileScreen extends React.Component {
@@ -32,6 +32,9 @@ class ProfileScreen extends React.Component {
                         disabled={true}
                     />
                 </View>
+                <Button icon="add-a-photo" mode="text" onPress={() => console.log('Pressed')}>
+                    Press me
+                </Button>
             </ScrollView>
         );
     }

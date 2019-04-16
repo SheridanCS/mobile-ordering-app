@@ -11,7 +11,6 @@ export function* watchGetRestaurantsList() {
 function* getRestaurantsList() {
     const auth = yield select(getAuthState);
     let restaurants = yield call(Restaurants.getRestaurantsList, auth.access_token);
-    console.log(restaurants);
     if (restaurants !== undefined && restaurants._embedded) {
         yield put({
             type: RESTAURANTS_LIST_UPDATED,

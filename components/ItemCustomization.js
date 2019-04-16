@@ -8,7 +8,7 @@ class ItemCustomization extends React.Component {
     }
 
     _toggleChecked = () => {
-        this.props.onPress(this.props.customization.id);
+        this.props.onPress(this.props.customization.name);
     };
 
     render() {
