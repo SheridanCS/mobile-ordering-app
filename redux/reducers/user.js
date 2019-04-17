@@ -63,6 +63,7 @@ export default function(state = initialState, action) {
         case USER_LOGOUT_SUCCESS:
             return {
                 ...state,
+                AuthInProgress: false,
                 IsLoggedIn: false,
                 Profile: {},
                 Payment: [],
